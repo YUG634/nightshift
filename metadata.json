@@ -1,0 +1,6 @@
+{
+  "name": "Nightshift",
+  "description": "AI Incident Investigator featuring a 3D evidence board, scripted interrogation, and root cause proof path analysis.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

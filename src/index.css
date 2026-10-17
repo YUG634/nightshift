@@ -1,0 +1,69 @@
+@import "tailwindcss";
+
+@theme {
+  --color-room: #0A0E1A;
+  --color-board: #141A24;
+  --color-card: #E8E6E0;
+  --color-card-ink: #1A1E26;
+  --color-cyan: #3FB9C9;
+  --color-crimson: #E5484D;
+  --color-amber: #E5A23F;
+  --color-thread-dim: #6B7A99;
+
+  --font-mono: 'JetBrains Mono', monospace;
+  --font-serif: 'IBM Plex Serif', Georgia, serif;
+  --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+:root {
+  --room: #0A0E1A;
+  --board: #141A24;
+  --card: #E8E6E0;
+  --card-ink: #1A1E26;
+  --cyan: #3FB9C9;
+  --crimson: #E5484D;
+  --amber: #E5A23F;
+  --thread-dim: #6B7A99;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  background-color: #0A0E1A;
+  color: #E8E6E0;
+  font-family: 'Inter', sans-serif;
+  overflow: hidden;
+  height: 100vh;
+  width: 100vw;
+}
+
+/* Custom scrollbars and mono letter spacing */
+.font-mono-tracked {
+  font-family: 'JetBrains Mono', monospace;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.font-serif-title {
+  font-family: 'IBM Plex Serif', Georgia, serif;
+}
+
+/* Stamp animation */
+@keyframes stampIn {
+  0% {
+    opacity: 0;
+    transform: scale(2.4) rotate(-8deg);
+  }
+  60% {
+    opacity: 0.9;
+    transform: scale(0.95) rotate(-13deg);
+  }
+  100% {
+    opacity: 0.88;
+    transform: scale(1) rotate(-12deg);
+  }
+}
+
+.case-closed-stamp {
+  animation: stampIn 0.35s cubic-bezier(0.18, 0.89, 0.32, 1.28) forwards;
+}
