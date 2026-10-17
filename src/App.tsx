@@ -30,6 +30,9 @@ export default function App() {
   // Step 4 Verdict & Warrant State
   const [isWarrantIssued, setIsWarrantIssued] = useState<boolean>(false);
 
+  // Ref to track timeouts across step transitions cleanly
+  const warrantTimeoutRef = useRef<NodeJS.Timeout | null>(null);
+
   // Step transition handlers
   const handleStartInvestigation = () => {
     setCurrentStep('investigation');
@@ -110,12 +113,16 @@ export default function App() {
     setIsInterrogationModalOpen(false);
   };
 
-  // Handle Step 4: Issue Warrant
+  // Handle Step 4: Issue Warrant with clearable timeout ref
   const handleIssueWarrant = () => {
     setIsWarrantIssued(true);
 
-    // Pin short postmortem card after a brief beat
-    setTimeout(() => {
+    // Clear any existing pending timeout before setting a new one
+    if (warrantTimeoutRef.current) {
+      clearTimeout(warrantTimeoutRef.current);
+    }
+
+    warrantTimeoutRef.current = setTimeout(() => {
       setBoardCards((prev) => {
         if (prev.some((c) => c.id === POSTMORTEM_CARD.id)) return prev;
         return [...prev, POSTMORTEM_CARD];
@@ -123,8 +130,12 @@ export default function App() {
     }, 450);
   };
 
-  // Full Flow Reset
+  // Full Flow Reset with state & timeout teardown
   const handleReset = () => {
+    if (warrantTimeoutRef.current) {
+      clearTimeout(warrantTimeoutRef.current);
+    }
+
     setCurrentStep('alert');
     setBoardCards([INITIAL_ALERT_CARD]);
     setBoardThreads([]);
